@@ -334,6 +334,11 @@
       "avocado": "Yes"
     }
   ],
+  "comparisonCaption": "Three workflows. One important difference: what you own.",
+  "comparisonColumns": {
+    "visual": "Visual SaaS builder",
+    "code": "Code + agent"
+  },
   "finalTitle": "The website is already in your repo.",
   "finalBody": "Avocado gives you a better way to work with it. Visual when visual is faster. Code when code is clearer. Agents when the work should be delegated. Git when the change is worth keeping. Currently focused on Astro projects and macOS."
 }

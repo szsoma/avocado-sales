@@ -23,7 +23,7 @@ const remaining = page.sections.filter(section => section.id !== 'choice');
     {remaining.map((section, i) => <>
       <Section section={section} number={i + 2} variant={['source', 'stack'].includes(section.id) ? 'statement' : ['workspace', 'utilities'].includes(section.id) ? 'standard' : undefined} />
       {section.id === 'agents' && <ProviderTabs providers={page.providers} id="home-provider" />}
-      {section.id === 'compare' && <Comparison rows={page.comparison} />}
+      {section.id === 'compare' && <Comparison rows={page.comparison} caption={page.comparisonCaption} columns={page.comparisonColumns} />}
     </>)}
     <FAQ site={site} />
     <FinalCTA title={page.finalTitle} body={page.finalBody} site={site} />

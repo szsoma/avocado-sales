@@ -1,6 +1,10 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-interface Props { rows: CollectionEntry<'pages'>['data']['comparison']; }
-const { rows } = Astro.props;
+interface Props {
+  rows: CollectionEntry<'pages'>['data']['comparison'];
+  caption?: string;
+  columns?: CollectionEntry<'pages'>['data']['comparisonColumns'];
+}
+const { rows, caption, columns } = Astro.props;
 ---
-<div class="comparison-wrap" role="region" aria-label="Workflow comparison, scroll horizontally for all columns" tabindex="0"><table class="comparison"><caption>Three workflows. One important difference: what you own.</caption><thead><tr><th scope="col">Capability</th><th scope="col">Visual SaaS builder</th><th scope="col">Code + agent</th><th scope="col">Avocado <span aria-hidden="true">↗</span></th></tr></thead><tbody>{rows.map(row => <tr><th scope="row">{row.capability}</th><td>{row.visual}</td><td>{row.code}</td><td>{row.avocado}</td></tr>)}</tbody></table></div>
+<div class="comparison-wrap" role="region" aria-label="Workflow comparison, scroll horizontally for all columns" tabindex="0"><table class="comparison">{caption && <caption>{caption}</caption>}<thead><tr><th scope="col">Capability</th><th scope="col">{columns?.visual}</th><th scope="col">{columns?.code}</th><th scope="col">Avocado <span aria-hidden="true">↗</span></th></tr></thead><tbody>{rows.map(row => <tr><th scope="row">{row.capability}</th><td>{row.visual}</td><td>{row.code}</td><td>{row.avocado}</td></tr>)}</tbody></table></div>

@@ -7,9 +7,11 @@ import ContextStory from '../components/ContextStory.astro';
 import ProviderTabs from '../components/ProviderTabs.astro';
 import Comparison from '../components/Comparison.astro';
 import FinalCTA from '../components/FinalCTA.astro';
-import { getPage, getSite, type PageId } from '../lib/content';
+import { getPage, getSite, isPageId } from '../lib/content';
 export function getStaticPaths() { return ['agents', 'workspace', 'content', 'compare'].map(page => ({ params: { page } })); }
-const id = Astro.params.page as PageId;
+const param = Astro.params.page;
+if (!param || !isPageId(param)) throw new Error(`Unknown page route: ${param}`);
+const id = param;
 const [page, site] = await Promise.all([getPage(id), getSite()]);
 ---
 <Base title={page.title} description={page.description}>
@@ -20,7 +22,7 @@ const [page, site] = await Promise.all([getPage(id), getSite()]);
       <Section section={section} number={i + 1} variant={['contract', 'independence'].includes(section.id) ? 'statement' : undefined} />
       {i === 0 && page.stages.length > 0 && <ContextStory stages={page.stages} mode={id === 'agents' ? 'context' : 'source'} title={page.storyTitle} eyebrow={page.storyEyebrow} note={page.storyNote} />}
       {section.id === 'activity' && <ProviderTabs providers={page.providers} id="agents-provider" />}
-      {section.id === 'approaches' && <Comparison rows={page.comparison} />}
+      {section.id === 'approaches' && <Comparison rows={page.comparison} caption={page.comparisonCaption} columns={page.comparisonColumns} />}
     </>)}
     <FinalCTA title={page.finalTitle} body={page.finalBody} site={site} />
   </main>

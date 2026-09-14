@@ -71,9 +71,11 @@ function setupDialogs() {
     return true;
   };
   document.addEventListener('click', event => {
-    const trigger = (event.target as Element).closest<HTMLElement>('[data-dialog]');
-    if (!trigger || event.defaultPrevented || !(event instanceof MouseEvent) || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
-    if (open(trigger.dataset.dialog!, trigger)) event.preventDefault();
+    if (!(event.target instanceof Element)) return;
+    const trigger = event.target.closest<HTMLElement>('[data-dialog]');
+    const id = trigger?.dataset.dialog;
+    if (!trigger || !id || event.defaultPrevented || !(event instanceof MouseEvent) || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+    if (open(id, trigger)) event.preventDefault();
   });
   // Direct links to technical content remain usable after progressive enhancement.
   if (location.hash) open(location.hash.slice(1), null, true);
@@ -101,7 +103,7 @@ function setupTabs() {
       panels[i].tabIndex = 0;
       tab.addEventListener('click', event => { event.preventDefault(); select(i); });
       tab.addEventListener('keydown', event => {
-        const index = event.key === 'ArrowRight' ? (i + 1) % tabs.length : event.key === 'ArrowLeft' ? (i + tabs.length - 1) % tabs.length : event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : null;
+        const index = event.key === 'ArrowRight' ? (i + 1) % tabs.length : event.key === 'ArrowLeft' ? (i + tabs.length - 1) % tabs.length : event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : event.key === ' ' ? i : null;
         if (index !== null) { event.preventDefault(); select(index, true); }
       });
     });

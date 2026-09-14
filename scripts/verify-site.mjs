@@ -11,9 +11,15 @@
 //      an `id` present in the target page's HTML.
 //   6. The FAQ JSON-LD on the home page matches the visible FAQ text exactly,
 //      in order, with the same count (excluding the "+" toggle glyph).
+//      Accepted limits: the FAQ markup is matched with the regex shape emitted
+//      by src/components/FAQ.astro (<details><summary>…<span aria-hidden="true">+</span></summary><p>…</p></details>);
+//      a markup change that nests elements inside those nodes reports a
+//      structure error rather than silently dropping entries.
 //   7. No fake signup form: no <form>, no email inputs, no fetch/XHR calls in
-//      shipped JS, and every early-access CTA that isn't backed by a real
-//      `site.signupUrl` points only at the local `#early-access` dialog.
+//      shipped or inline scripts, and every early-access CTA that isn't backed
+//      by a real `site.signupUrl` points only at the local `#early-access` dialog.
+//      Accepted limits: CSS url() references and <source srcset> targets are not
+//      scanned; internal URLs containing ".." are rejected outright.
 //
 // Usage:
 //   node scripts/verify-site.mjs [distDir]
@@ -48,16 +54,23 @@ function fail(message) {
   errors.push(message);
 }
 
+const NAMED_ENTITIES = {
+  amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: '\u00a0',
+  mdash: '\u2014', ndash: '\u2013', hellip: '\u2026',
+  lsquo: '\u2018', rsquo: '\u2019', ldquo: '\u201c', rdquo: '\u201d',
+};
+
+function codePoint(value) {
+  return Number.isInteger(value) && value >= 0 && value <= 0x10ffff ? String.fromCodePoint(value) : '\uFFFD';
+}
+
+// Single left-to-right pass so entities are decoded exactly once (no double
+// decoding of "&amp;lt;"). Unknown named entities are left as written.
 function decodeEntities(text) {
   return text
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#0*39;|&apos;/g, "'")
-    .replace(/&#x27;/gi, "'")
-    .replace(/&#(\d+);/g, (_, dec) => String.fromCodePoint(Number(dec)))
-    .replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCodePoint(parseInt(hex, 16)))
-    .replace(/&amp;/g, '&');
+    .replace(/&#x([0-9a-f]+);/gi, (_, hex) => codePoint(parseInt(hex, 16)))
+    .replace(/&#(\d+);/g, (_, dec) => codePoint(Number(dec)))
+    .replace(/&([a-z]+);/gi, (match, name) => NAMED_ENTITIES[name.toLowerCase()] ?? match);
 }
 
 // Strip an "#..." or "?..." suffix and return the path portion only.
@@ -72,9 +85,10 @@ function isLocalUrl(url) {
 }
 
 // Resolve a local URL (rooted at "/") to an absolute filesystem path under distDir.
+// Rejects ".." segments so a crafted link can never escape the build output.
 function localUrlToFsPath(url) {
   const clean = pathOnly(url);
-  if (!clean) return null;
+  if (!clean || clean.split('/').includes('..')) return null;
   const rooted = clean.startsWith('/') ? clean.slice(1) : clean;
   return join(distDir, rooted);
 }
@@ -325,7 +339,9 @@ function checkNoFakeSignupForm() {
     }
   }
 
-  // 7b. No network-request calls shipped in the site's JS (fetch/XHR/sendBeacon).
+  // 7b. No network-request calls shipped in the site's JS (fetch/XHR/sendBeacon),
+  //     including inline <script> bodies. JSON-LD blocks are data, not code, so
+  //     they are excluded from the scan.
   const allFiles = existsSync(distDir) ? listFilesRecursive(distDir) : [];
   const jsFiles = allFiles.filter((f) => f.endsWith('.js'));
   const networkCallPattern = /\bfetch\s*\(|new\s+XMLHttpRequest\s*\(|navigator\.sendBeacon\s*\(/;
@@ -333,6 +349,15 @@ function checkNoFakeSignupForm() {
     const js = readFileSync(jsFile, 'utf8');
     if (networkCallPattern.test(js)) {
       fail(`Shipped script ${jsFile} contains a network request call (fetch/XMLHttpRequest/sendBeacon); the site must not send network requests.`);
+    }
+  }
+  for (const [routePath, { html, filePath }] of pages) {
+    const inlineScripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
+      .filter(([, attrs]) => !/application\/ld\+json/i.test(attrs));
+    for (const [, , body] of inlineScripts) {
+      if (networkCallPattern.test(body)) {
+        fail(`Route "${routePath}" (${filePath}): inline <script> contains a network request call (fetch/XMLHttpRequest/sendBeacon); the site must not send network requests.`);
+      }
     }
   }
 

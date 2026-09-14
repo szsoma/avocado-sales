@@ -74,6 +74,8 @@ const pages = defineCollection({
     comparison: z.array(z.object({
       capability: z.string().min(1), visual: z.string().min(1), code: z.string().min(1), avocado: z.string().min(1),
     })).default([]),
+    comparisonCaption: z.string().min(1).optional(),
+    comparisonColumns: z.object({ visual: z.string().min(1), code: z.string().min(1) }).optional(),
     finalTitle: z.string().min(1),
     finalBody: z.string().min(1),
   }),

@@ -1,6 +1,10 @@
 import { getEntry } from 'astro:content';
 
-export type PageId = 'home' | 'agents' | 'workspace' | 'content' | 'compare';
+const pageIds = ['home', 'agents', 'workspace', 'content', 'compare'] as const;
+export type PageId = (typeof pageIds)[number];
+export function isPageId(value: string): value is PageId {
+  return (pageIds as readonly string[]).includes(value);
+}
 const requiredSections: Record<PageId, string[]> = {
   home: ['choice', 'agents', 'pins', 'source', 'workspace', 'preservation', 'cms', 'variables', 'utilities', 'stack', 'compare', 'audience'],
   agents: ['context', 'activity', 'configuration', 'review', 'sessions', 'mcp'],

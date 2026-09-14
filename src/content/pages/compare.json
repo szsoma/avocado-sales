@@ -164,6 +164,11 @@
       "avocado": "Claude Code, Codex, OpenCode"
     }
   ],
+  "comparisonCaption": "Three workflows. One important difference: what you own.",
+  "comparisonColumns": {
+    "visual": "Webflow-style builder",
+    "code": "Code editor + agent"
+  },
   "stages": [],
   "providers": [],
   "finalTitle": "Own the site after you close the builder.",
