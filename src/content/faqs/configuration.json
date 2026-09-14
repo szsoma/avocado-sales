@@ -1,0 +1,5 @@
+{
+  "question": "Does Avocado modify my Astro configuration?",
+  "answer": "Avocado works alongside the project configuration. Its development integration uses an injected configuration layer rather than rewriting your astro.config.*, tsconfig.json, or package.json.",
+  "order": 9
+}

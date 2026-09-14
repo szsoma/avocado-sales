@@ -1,0 +1,19 @@
+{
+  "title": "Source-preserving edits",
+  "eyebrow": "Under the hood",
+  "intro": "Change the thing you touched. Leave the rest alone.",
+  "sections": [
+    {
+      "title": "Targeted source operations",
+      "body": "Avocado's Rust core tracks source locations using byte ranges. Structured operations can update targeted parts of a file without serializing the entire document back into a new representation."
+    },
+    {
+      "title": "Keep authored code intact",
+      "body": "Unrelated formatting, comments, declaration order, and quoting can remain intact. The principle: preserve the author's bytes whenever possible."
+    },
+    {
+      "title": "An explicit fallback",
+      "body": "When Avocado cannot safely understand a file structurally, it can fall back to source editing rather than pretending it understood something it did not."
+    }
+  ]
+}

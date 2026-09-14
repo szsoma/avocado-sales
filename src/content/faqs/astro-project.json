@@ -1,0 +1,5 @@
+{
+  "question": "Does Avocado replace my Astro project?",
+  "answer": "No. Avocado opens and edits the Astro project you already have. The repository remains the source of truth.",
+  "order": 1
+}

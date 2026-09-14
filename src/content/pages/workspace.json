@@ -1,0 +1,119 @@
+{
+  "storyTitle": "From pixel to source in one interaction.",
+  "storyEyebrow": "One element. Connected.",
+  "storyNote": "The page and the source are two views of the same thing.",
+  "title": "Visual workspace for Astro — Avocado",
+  "description": "See your actual Astro site, navigate source-backed elements, inspect component props, compare responsive previews, and edit source in one local workspace.",
+  "eyebrow": "The canvas",
+  "headline": "See the site Astro actually renders.",
+  "intro": "Avocado runs your project's own development server and brings the rendered page into a source-aware visual workspace. The canvas is an interface to your existing project.",
+  "heroMedia": "canvas",
+  "sections": [
+    {
+      "id": "relationships",
+      "eyebrow": "From pixel to source",
+      "title": "The page and the source are two views of the same thing.",
+      "body": [],
+      "items": [
+        {
+          "title": "Canvas → Navigator",
+          "body": "Click the thing you see. Find the source-backed node."
+        },
+        {
+          "title": "Navigator → Canvas",
+          "body": "Choose an element in the hierarchy. See where it lives on the page."
+        },
+        {
+          "title": "Canvas → Inspector",
+          "body": "Inspect the source file, tag, attributes, component props, and source location."
+        },
+        {
+          "title": "Canvas → Code",
+          "body": "Go from rendered element to source without manually searching the repository."
+        }
+      ],
+      "media": "structure"
+    },
+    {
+      "id": "components",
+      "eyebrow": "Component boundaries",
+      "title": "Inspect components without pretending components are boxes.",
+      "body": [
+        "Avocado understands component boundaries in Astro projects. Enter a component. Inspect its declared props. Edit supported literal values. Move back out to the page.",
+        "When something requires code, open the source instead of forcing it through a visual abstraction."
+      ],
+      "items": [],
+      "media": "structure"
+    },
+    {
+      "id": "responsive",
+      "eyebrow": "Desktop, tablet, phone",
+      "title": "Responsive work without opening three browser windows.",
+      "body": [
+        "Preview the page at desktop, tablet, and phone widths, or compare multiple sizes at once.",
+        "Zoom and pan the stage while keeping the project around it. When the embedded canvas is not enough, open the same page in your browser."
+      ],
+      "items": [],
+      "media": "canvas"
+    },
+    {
+      "id": "code",
+      "eyebrow": "Source is part of the product",
+      "title": "The code editor is not an escape hatch.",
+      "body": [
+        "Some jobs are faster visually. Some jobs are easier in source. Avocado does not need one interface to win every time.",
+        "Open the code pane. Jump to the relevant source. Edit. Save. Return to the page. Keep moving."
+      ],
+      "items": [],
+      "media": "code"
+    },
+    {
+      "id": "style",
+      "eyebrow": "Source-side style provenance",
+      "title": "Understand CSS before changing it.",
+      "body": [
+        "The Style view helps explain where a selected element's source-side styling comes from: property, value, selector, file, line, and origin. Use it to follow the cascade back into the project.",
+        "Current limitation: visual CSS editing controls and live computed-style editing are not yet part of the shipped Style surface."
+      ],
+      "items": []
+    },
+    {
+      "id": "variables",
+      "eyebrow": "CSS is still the source",
+      "title": "Variables turn CSS tokens into a project interface.",
+      "body": [
+        "Instead of scanning stylesheets for every custom property, Avocado can organize project variables into a dedicated surface.",
+        "Stylesheet tabs. Groups. Modes. Comparable values. Reordering. Responsive typography checks. All while writing back to the CSS that already exists."
+      ],
+      "items": [],
+      "media": "variables"
+    }
+  ],
+  "stages": [
+    {
+      "title": "Rendered button",
+      "body": "Start with the element on the page. This is an explanatory example of the source-selection workflow.",
+      "code": "Get Started"
+    },
+    {
+      "title": "Source selection",
+      "body": "Connect the rendered element to its component.",
+      "code": "<Button variant=\"primary\">"
+    },
+    {
+      "title": "Component",
+      "body": "Follow the selection into the component's source file.",
+      "code": "src/components/Button.astro"
+    },
+    {
+      "title": "Source",
+      "body": "Read the relevant implementation and continue in code when that is the clearer interface.",
+      "code": "<Button variant=\"primary\">\n  Get Started\n</Button>",
+      "media": "code"
+    }
+  ],
+  "providers": [],
+  "comparison": [],
+  "finalTitle": "Don't rebuild the website inside your website builder.",
+  "finalBody": "Build on the website you already have."
+}

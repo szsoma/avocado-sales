@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ProductImage from './ProductImage.astro';
+interface Props { section: CollectionEntry<'pages'>['data']['sections'][number]; variant?: 'standard' | 'split' | 'statement'; number?: number; }
+const { section, variant = section.media ? 'split' : 'standard', number } = Astro.props;
+---
+<section id={section.id} class:list={['chapter', { statement: variant === 'statement' }]} aria-labelledby={`heading-${section.id}`}>
+  <div class:list={[{ 'feature-split': variant === 'split' }]}>
+    <div class="feature-content"><p class="eyebrow section-label">{number !== undefined ? `${String(number).padStart(2, '0')} / ` : ''}{section.eyebrow}</p>
+      <div class:list={[{ 'chapter-head': variant === 'standard' }]}><h2 id={`heading-${section.id}`}>{section.title}</h2>
+        <div class="chapter-copy">{section.body.map(p => <p>{p}</p>)}{section.link && <a class="text-link" href={section.link.href} data-dialog={section.link.href.startsWith('#technical-') ? section.link.href.slice(1) : undefined}>{section.link.label}<span class="arrow" aria-hidden="true">↗</span></a>}</div>
+      </div>
+      {section.items.length > 0 && <div class="item-grid">{section.items.map((item, index) => <article class="item"><span class="item-index" aria-hidden="true">{String(index + 1).padStart(2, '0')} /</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>}
+      {section.code && <pre class="code-sample"><code>{section.code}</code></pre>}
+    </div>
+    {section.media && <ProductImage media={section.media} sizes="(max-width: 760px) 92vw, 700px" />}
+  </div>
+</section>

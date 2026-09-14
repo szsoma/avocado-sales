@@ -1,0 +1,5 @@
+{
+  "question": "Does Avocado include an AI model?",
+  "answer": "No. Avocado provides the workspace, context, orchestration, and review experience around coding agents you already use.",
+  "order": 5
+}

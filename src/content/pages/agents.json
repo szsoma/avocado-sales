@@ -1,0 +1,157 @@
+{
+  "storyTitle": "“Fix this card on mobile.”",
+  "storyEyebrow": "Context, attached",
+  "storyNote": "Less prompting. More grounding.",
+  "title": "Agent workspace — Avocado",
+  "description": "Give Claude Code, Codex, and OpenCode source-linked context from your Astro site. Follow the work and review the actual changes in Avocado.",
+  "eyebrow": "Agent workspace",
+  "headline": "Stop describing the website to your coding agent.",
+  "intro": "Avocado gives Claude Code, Codex, and OpenCode structured context from the project you are actually looking at. Select the element. Reference the page. Attach the file. Include the errors. Then ask for the change.",
+  "heroMedia": "agent",
+  "sections": [
+    {
+      "id": "context",
+      "eyebrow": "The website around the prompt",
+      "title": "An agent conversation with the website still attached.",
+      "body": [
+        "A normal coding agent starts with what you tell it. Avocado can add what the interface already knows."
+      ],
+      "items": [
+        {
+          "title": "Selected element",
+          "body": "File, location, tag, attributes, and ancestors."
+        },
+        {
+          "title": "Referenced elements",
+          "body": "Source path, relevant source excerpt, and component context."
+        },
+        {
+          "title": "Current page",
+          "body": "A bounded structural summary of the page you are working on."
+        },
+        {
+          "title": "Console",
+          "body": "Errors reported by the running page."
+        },
+        {
+          "title": "Attachments",
+          "body": "Images and project files when supported by the selected backend."
+        },
+        {
+          "title": "Pins",
+          "body": "A visual comment can become an agent handoff without rewriting the problem from scratch."
+        }
+      ],
+      "media": "pins"
+    },
+    {
+      "id": "activity",
+      "eyebrow": "Inspectable work",
+      "title": "Watch the work instead of waiting for the answer.",
+      "body": [
+        "Agent activity becomes part of the interface: streamed reasoning output, plans, task progress, tool calls, permissions, changed files, and diffs.",
+        "The purpose is to make the agent's work inspectable."
+      ],
+      "items": []
+    },
+    {
+      "id": "configuration",
+      "eyebrow": "Your provider, your configuration",
+      "title": "Your configuration remains yours.",
+      "body": [
+        "Avocado can read available CLI configuration, models, skills, plugins, MCP settings, and authentication state where supported.",
+        "It does not rewrite your Claude Code, Codex, or OpenCode configuration trees. Per-project Avocado settings stay with the project. Your provider continues to control the model."
+      ],
+      "items": []
+    },
+    {
+      "id": "review",
+      "eyebrow": "Review what actually happened",
+      "title": "Review the code, not just the response.",
+      "body": [
+        "An agent saying “done” is not the end of the workflow. Avocado records changed files and gives you a review surface for what actually happened.",
+        "Open the file. Expand the diff. Compare the change. Revert individual files where Avocado can safely restore the recorded state.",
+        "Then commit it through Git when you decide it belongs in the project."
+      ],
+      "items": []
+    },
+    {
+      "id": "sessions",
+      "eyebrow": "Local history, deliberate resume",
+      "title": "Sessions that remember where they belong.",
+      "body": [
+        "Agent sessions are stored locally and remain connected to their project and Git branch.",
+        "Return to previous transcripts. Search, rename, and archive them. Inspect a session from elsewhere. Resume it only when the project and branch context is safe.",
+        "Continuing the wrong conversation in the wrong codebase is not a convenience."
+      ],
+      "items": []
+    },
+    {
+      "id": "mcp",
+      "eyebrow": "External agent workflow",
+      "title": "Prefer the terminal? Keep it.",
+      "body": [
+        "Register Avocado's MCP server with your normal Claude Code, Codex, or OpenCode CLI.",
+        "Your terminal-launched agent can request pins, source outline, components, props, pages, collections, entries, backlinks, and style provenance. When the live app is available, canvas snapshots and selection context can also be available.",
+        "The external MCP interface is deliberately read-only. Your agent's normal tools remain responsible for changing the project."
+      ],
+      "items": [],
+      "link": {
+        "label": "How agent context works",
+        "href": "#technical-context"
+      }
+    }
+  ],
+  "stages": [
+    {
+      "title": "Prompt",
+      "body": "“Fix this card on mobile.”",
+      "code": "Fix this card on mobile."
+    },
+    {
+      "title": "Selected element",
+      "body": "Add the selected component to ground the request.",
+      "code": "+ Selected <PricingCard>"
+    },
+    {
+      "title": "Source file",
+      "body": "Connect the visible element to its implementation.",
+      "code": "+ src/components/PricingCard.astro"
+    },
+    {
+      "title": "Viewport",
+      "body": "Include the mobile viewport being discussed.",
+      "code": "+ Mobile viewport"
+    },
+    {
+      "title": "Console",
+      "body": "Bring errors from the running page into context.",
+      "code": "+ Console error"
+    },
+    {
+      "title": "Attachment",
+      "body": "Include a screenshot or attachment when supported by the backend. Less prompting. More grounding.",
+      "code": "+ Screenshot / attachment"
+    }
+  ],
+  "providers": [
+    {
+      "name": "Claude Code",
+      "detail": "Use Claude Code through its installed local CLI. Avocado reads the available configuration and runs the agent inside the project workflow while keeping your existing Claude authentication and subscription model.",
+      "note": "Uses your installed local CLI and existing Claude authentication and subscription."
+    },
+    {
+      "name": "Codex",
+      "detail": "Use Codex through its local app-server integration with model selection, reasoning controls, approvals, context, and supported thread resume.",
+      "note": "Codex's app-server is currently an experimental upstream interface."
+    },
+    {
+      "name": "OpenCode",
+      "detail": "Use OpenCode through its native ACP connection with model and access controls, streamed turns, permissions, and capability-aware session loading.",
+      "note": "Session loading follows the capabilities supported by the provider."
+    }
+  ],
+  "comparison": [],
+  "finalTitle": "Give the agent the page around the prompt.",
+  "finalBody": "Your website, source context, and review workflow in the same local workspace."
+}

@@ -1,0 +1,5 @@
+{
+  "image": "../../assets/product/page-structure.png",
+  "alt": "The Hero component selected in Avocado's Navigator, outlined in the live page, with its props shown in Settings.",
+  "caption": "The rendered page, component hierarchy, and source-backed props stay connected."
+}

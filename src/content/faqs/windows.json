@@ -1,0 +1,5 @@
+{
+  "question": "Does it work on Windows?",
+  "answer": "The current pre-alpha is primarily developed for macOS. Windows is not currently supported.",
+  "order": 13
+}

@@ -1,0 +1,5 @@
+{
+  "question": "Is Avocado's CMS hosted?",
+  "answer": "No. The CMS reads and edits the content inside your Astro project. Avocado does not move the content into a hosted Avocado database.",
+  "order": 7
+}

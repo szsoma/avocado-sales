@@ -1,0 +1,9 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { stages: CollectionEntry<'pages'>['data']['stages']; mode: 'context' | 'source'; title: string; eyebrow: string; note?: string; }
+const { stages, mode, title, eyebrow, note } = Astro.props;
+---
+<section class="chapter context-story" data-context-story aria-label={mode === 'context' ? 'How a prompt gains project context' : 'From a rendered element to source'}>
+  <div class="context-board"><p class="eyebrow">{eyebrow}</p><h2>{title}</h2><div class="context-chips">{stages.map((stage, i) => <span data-context-chip data-index={i}><span aria-hidden="true">+</span> {stage.title}</span>)}</div>{note && <p class="context-board-note">{note}</p>}</div>
+  <div class="context-steps">{stages.map((stage, i) => <article data-context-step><span class="step-number">{String(i + 1).padStart(2, '0')} /</span><h3>{stage.title}</h3><p>{stage.body}</p>{stage.code && <pre class="code-sample"><code>{stage.code}</code></pre>}</article>)}</div>
+</section>

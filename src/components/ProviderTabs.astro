@@ -1,0 +1,9 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { providers: CollectionEntry<'pages'>['data']['providers']; id: string; }
+const { providers, id } = Astro.props;
+---
+<div class="provider-tabs" data-tabs>
+  <div class="provider-triggers" data-tab-list aria-label="Coding agent integrations">{providers.map((provider, i) => <a href={`#${id}-panel-${i}`} id={`${id}-tab-${i}`} data-tab>{provider.name}<span aria-hidden="true">↗</span></a>)}</div>
+  <div class="provider-panels">{providers.map((provider, i) => <section id={`${id}-panel-${i}`} data-tab-panel aria-labelledby={`${id}-tab-${i}`}><span class="provider-label" aria-hidden="true">0{i + 1} / INTEGRATION</span><div><h3>{provider.name}</h3><p>{provider.detail}</p><p class="provider-note">{provider.note}</p></div></section>)}</div>
+</div>

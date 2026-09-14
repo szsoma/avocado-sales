@@ -1,0 +1,5 @@
+{
+  "question": "Does my production website need Avocado?",
+  "answer": "No. The goal is for the project to remain a normal Astro project that can build independently of Avocado.",
+  "order": 8
+}

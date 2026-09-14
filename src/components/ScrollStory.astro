@@ -1,0 +1,10 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ProductImage from './ProductImage.astro';
+interface Props { stages: CollectionEntry<'pages'>['data']['stages']; title: string; eyebrow: string; id?: string; }
+const { stages, title, eyebrow, id = 'workflow' } = Astro.props;
+---
+<section id={id} class="chapter scroll-story" data-scroll-story aria-labelledby={`${id}-title`}>
+  <p class="eyebrow section-label">{eyebrow}</p><h2 id={`${id}-title`}>{title}</h2>
+  <div class="story-layout"><div class="story-steps">{stages.map((stage, index) => <article class="story-step" data-story-step><span class="step-number">{String(index + 1).padStart(2, '0')} <span aria-hidden="true">/</span></span><h3>{stage.title}</h3><p>{stage.body}</p><div class="step-visual" data-story-visual>{stage.media ? <ProductImage media={stage.media} sizes="(max-width: 760px) 92vw, 800px" /> : <div class="story-explainer"><p class="eyebrow">Workflow illustration</p><div class="explainer-nodes" aria-hidden="true"><span>↗</span><i></i><span>⌘</span><i></i><span>✓</span></div><h3>{stage.title}</h3>{stage.code && <pre><code>{stage.code}</code></pre>}</div>}</div></article>)}</div><div class="story-stage" data-story-stage hidden><div class="story-stage-bar"><span>AVOCADO / WORKFLOW</span><span data-story-progress>01 / {String(stages.length).padStart(2, '0')}</span></div><div data-story-screen></div><div class="story-progress-track" aria-hidden="true"><span data-story-meter></span></div></div></div>
+</section>

@@ -1,0 +1,9 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+interface Props { site: CollectionEntry<'site'>['data']; }
+const { site } = Astro.props;
+const faqs = (await getCollection('faqs')).sort((a,b) => a.data.order - b.data.order);
+const schema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(({data}) => ({ '@type': 'Question', name: data.question, acceptedAnswer: { '@type': 'Answer', text: data.answer } })) };
+---
+<section class="chapter faq" aria-labelledby="faq-heading"><div><p class="eyebrow section-label">{site.faqEyebrow}</p><h2 id="faq-heading">{site.faqTitle}</h2><p class="muted">{site.faqIntro}</p></div><div class="faq-list">{faqs.map(({ data }) => <details><summary>{data.question}<span aria-hidden="true">+</span></summary><p>{data.answer}</p></details>)}</div></section>
+<script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\u003c')} />

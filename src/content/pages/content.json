@@ -1,0 +1,101 @@
+{
+  "storyTitle": "",
+  "storyEyebrow": "",
+  "title": "Local CMS for Astro — Avocado",
+  "description": "Edit Astro content collections, images, references, and Markdown in a local CMS. Keep project files canonical and deploy without an Avocado runtime.",
+  "eyebrow": "Local CMS for Astro",
+  "headline": "Your content doesn't need a second source of truth.",
+  "intro": "Avocado reads your Astro content collections and gives them a visual editing surface while keeping the actual project files canonical. No hosted content database required. No Avocado runtime required on the finished website.",
+  "heroMedia": "cms-editor",
+  "sections": [
+    {
+      "id": "schema",
+      "eyebrow": "Your project defines the model",
+      "title": "The schema becomes the interface.",
+      "body": [
+        "Avocado evaluates the project's own Astro content configuration and uses it to understand your collections.",
+        "Text. Numbers. Dates. Images. References. Markdown. Validation. The content editor can work with the types your project already defines.",
+        "The project defines the model. Avocado provides the interface."
+      ],
+      "items": [],
+      "media": "cms",
+      "code": "src/content.config.ts  → Collection schemas\nsrc/content/           → Content entries\nsrc/assets/            → Related images"
+    },
+    {
+      "id": "editing",
+      "eyebrow": "Real files, visual editing",
+      "title": "Edit content without forgetting that it is code.",
+      "body": [
+        "Browse collections. Choose an entry. Edit structured fields. Write Markdown content. Follow references. See backlinks. Validate the result. Save it back into the project.",
+        "Content remains versionable through Git like the rest of the website."
+      ],
+      "items": [],
+      "media": "cms-editor"
+    },
+    {
+      "id": "references",
+      "eyebrow": "Relationships you can follow",
+      "title": "References become visible.",
+      "body": [
+        "Content relationships are difficult when they exist only as IDs and filenames. Avocado derives an index that can connect entries, references, backlinks, page usage, and related assets.",
+        "The index is disposable. Your files are not.",
+        "Delete the index and rebuild it. Your content remains the same."
+      ],
+      "items": []
+    },
+    {
+      "id": "guards",
+      "eyebrow": "Context before deletion",
+      "title": "Know before you delete.",
+      "body": [
+        "A referenced entry should not disappear silently. A used asset should not be removed without context.",
+        "Avocado can use its derived index to surface references and delete guards before destructive content operations."
+      ],
+      "items": []
+    },
+    {
+      "id": "assets",
+      "eyebrow": "Both Astro asset worlds",
+      "title": "Assets belong beside the content that uses them.",
+      "body": [
+        "Upload. Preview. Organize. Select assets from content fields. Inspect content backlinks before removing referenced files."
+      ],
+      "items": [
+        {
+          "title": "src/assets",
+          "body": "Files processed through Astro's asset pipeline."
+        },
+        {
+          "title": "public",
+          "body": "Files copied directly into the final site."
+        }
+      ],
+      "media": "assets"
+    },
+    {
+      "id": "independence",
+      "eyebrow": "No production dependency",
+      "title": "Content without a SaaS dependency.",
+      "body": [
+        "Your CMS can be part of the development environment without becoming part of the production infrastructure.",
+        "Build with Avocado. Commit with Git. Deploy through your existing workflow. Run the finished website without Avocado."
+      ],
+      "items": []
+    },
+    {
+      "id": "compatibility",
+      "eyebrow": "Current pre-alpha compatibility",
+      "title": "Built around your Astro schema.",
+      "body": [
+        "Full collection schema introspection currently depends on the Astro and Zod versions supported by Avocado's current CMS implementation.",
+        "For the current pre-alpha, Astro 6+ is the primary target for full CMS schema introspection."
+      ],
+      "items": []
+    }
+  ],
+  "stages": [],
+  "providers": [],
+  "comparison": [],
+  "finalTitle": "Keep the CMS interface.",
+  "finalBody": "Keep the files too."
+}

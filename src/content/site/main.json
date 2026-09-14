@@ -1,0 +1,34 @@
+{
+  "heroSecondaryLabel": "See how Avocado works",
+  "capabilityLabels": ["REAL ASTRO FILES","ACTUAL ASTRO DEV PAGE","CLAUDE CODE","CODEX","OPENCODE","GIT NATIVE","LOCAL-FIRST"],
+  "faqTitle": "A few things worth knowing.",
+  "faqEyebrow": "Good questions",
+  "faqIntro": "Real files. Clear boundaries.",
+  "technicalLinkLabel": "Under the hood",
+  "availabilityTitle": "A closer connection to your website.",
+  "availabilityIntro": "Avocado is currently in pre-alpha, focused on Astro projects and macOS. It is not yet publicly distributed.",
+  "availabilityNote": "Early-access signup is not connected in this preview. No email is collected or saved.",
+  "name": "Avocado",
+  "description": "A local, agent-first visual development environment for Astro.",
+  "status": "Pre-alpha. macOS first.",
+  "ctaLabel": "Request early access",
+  "nav": [
+    {
+      "label": "Product",
+      "href": "/workspace"
+    },
+    {
+      "label": "Agents",
+      "href": "/agents"
+    },
+    {
+      "label": "Content",
+      "href": "/content"
+    },
+    {
+      "label": "Compare",
+      "href": "/compare"
+    }
+  ],
+  "footerLine": "Built for real repositories."
+}

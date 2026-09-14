@@ -1,0 +1,5 @@
+{
+  "question": "Can I open a Webflow or WordPress project?",
+  "answer": "Not directly. Avocado currently targets Astro repositories. Webflow and WordPress users may recognize parts of the workflow, but Avocado is not currently a general-purpose importer for those platforms.",
+  "order": 3
+}

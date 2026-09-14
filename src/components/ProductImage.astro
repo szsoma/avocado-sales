@@ -1,0 +1,10 @@
+---
+import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
+interface Props { media: { collection: 'media'; id: string }; eager?: boolean; caption?: boolean; sizes?: string; }
+const { media, eager = false, caption = true, sizes = '(max-width: 760px) 92vw, (max-width: 1400px) 85vw, 1200px' } = Astro.props;
+const entry = await getEntry(media);
+if (!entry) throw new Error(`Missing product media: ${media.id}`);
+const { image, alt, caption: description } = entry.data;
+---
+<figure class="product-image"><Image src={image} alt={alt} widths={[480, 800, 1280, image.width]} sizes={sizes} format="webp" quality={85} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} />{caption && <figcaption>{description}</figcaption>}</figure>

@@ -1,0 +1,5 @@
+{
+  "image": "../../assets/product/style-variables.png",
+  "alt": "Avocado's Variables surface displaying grouped CSS colors and typography values from src/styles/global.css.",
+  "caption": "CSS custom properties organized by stylesheet, with color values and responsive typography checks."
+}

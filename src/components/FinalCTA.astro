@@ -1,0 +1,7 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import AccessLink from './AccessLink.astro';
+interface Props { title: string; body: string; site: CollectionEntry<'site'>['data']; }
+const { title, body, site } = Astro.props;
+---
+<section class="end-cta" aria-labelledby="final-heading"><p class="eyebrow">{site.name} / {site.status}</p><div class="end-cta-inner"><div><h2 id="final-heading">{title}</h2><p>{body}</p></div><AccessLink site={site} /></div></section>

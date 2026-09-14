@@ -1,0 +1,5 @@
+{
+  "image": "../../assets/product/Hero-img.png",
+  "alt": "Avocado showing a live Astro page between the source Navigator and Inspector, with a local Codex session in the sidebar.",
+  "caption": "Your running Astro page, source structure, and agent sessions in one local workspace."
+}

@@ -1,0 +1,5 @@
+{
+  "question": "Does Avocado replace Git?",
+  "answer": "No. Git remains the durable history and collaboration model. Avocado adds a local Git interface for common branch, commit, merge, review, remote, and push workflows.",
+  "order": 6
+}

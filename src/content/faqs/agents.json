@@ -1,0 +1,5 @@
+{
+  "question": "Which coding agents does Avocado support?",
+  "answer": "The current integrations are Claude Code, OpenCode, and Codex. Avocado orchestrates their installed local CLIs. Authentication, subscriptions, model availability, and provider configuration remain with the respective tools.",
+  "order": 4
+}

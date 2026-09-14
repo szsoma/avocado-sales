@@ -1,0 +1,5 @@
+{
+  "image": "../../assets/product/asets.png",
+  "alt": "Avocado's asset browser with public selected, showing an images folder, favicon, logo, and social preview image.",
+  "caption": "Browse public files separately from src/assets, with thumbnails and file operations."
+}

@@ -1,0 +1,5 @@
+{
+  "question": "Does Avocado host or deploy websites?",
+  "answer": "No. Hosting and deployment remain part of your existing development workflow. Use the platform you already prefer.",
+  "order": 12
+}

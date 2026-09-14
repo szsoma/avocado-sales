@@ -1,0 +1,5 @@
+{
+  "question": "Can Avocado visually edit every CSS property?",
+  "answer": "Not currently. The Style view focuses on tracing styles back to their source declarations. The Variables surface supports editing CSS custom properties. A complete visual CSS editing interface is not currently part of the shipped product.",
+  "order": 10
+}

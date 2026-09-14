@@ -1,0 +1,171 @@
+{
+  "storyTitle": "",
+  "storyEyebrow": "",
+  "title": "Compare website development workflows — Avocado",
+  "description": "Compare visual builders, code editors with agents, and Avocado: source ownership, visual context, local CMS, Git, hosting choice, and current limitations.",
+  "eyebrow": "Why Avocado",
+  "headline": "Not another website builder.",
+  "intro": "Avocado starts from a different assumption: the builder should not become the source of truth. Your repository already is.",
+  "heroMedia": "hero",
+  "sections": [
+    {
+      "id": "approaches",
+      "eyebrow": "Three ways to build",
+      "title": "Where does the website live?",
+      "body": [],
+      "items": [
+        {
+          "title": "Traditional visual builder",
+          "body": "You work on the representation. The platform owns the document model and gives you a powerful visual abstraction over it. Excellent when the platform is where you want your project to live. Less ideal when the codebase itself needs to remain the primary product."
+        },
+        {
+          "title": "Code + coding agent",
+          "body": "You work directly on the implementation. You keep the repo, Git, tooling, deployment freedom, and agent ecosystem. But the agent and editor know far more about the files than the browser state you are looking at. Visual context becomes manual work."
+        },
+        {
+          "title": "Avocado",
+          "body": "You work on the implementation through the page. The repository remains authoritative. The page comes from your real Astro dev server. The canvas connects visual selections back to source. The agent can receive structured project context. The result lands directly in the codebase you already own."
+        }
+      ]
+    },
+    {
+      "id": "visual",
+      "eyebrow": "Avocado vs a visual builder",
+      "title": "Keep what visual tools get right.",
+      "body": [
+        "Immediate feedback. Visible structure. Pointing instead of searching. Project-wide interfaces for pages, assets, variables, and content.",
+        "Leave behind a proprietary project document, a mandatory hosting platform, an export boundary, and a second version of the website that exists only inside the tool."
+      ],
+      "items": []
+    },
+    {
+      "id": "agent",
+      "eyebrow": "Avocado vs coding with an agent",
+      "title": "Keep what agentic development gets right.",
+      "body": [
+        "Real source. Real tools. Git. Automation. Provider choice. The ability to make large structural changes through code.",
+        "Add the missing visual context: a live page, source-aware selection, pins, page context, console errors, and review surfaces. A place to see what changed while the agent is still part of the workflow."
+      ],
+      "items": [],
+      "media": "agent"
+    },
+    {
+      "id": "contract",
+      "eyebrow": "The repository is the contract",
+      "title": "Leaving Avocado should be boring.",
+      "body": [
+        "Open the project elsewhere. Run Astro. Use your editor. Use your terminal. Use Git. Deploy normally.",
+        "The application should make working on the repository better without becoming a condition for the repository to exist."
+      ],
+      "items": []
+    }
+  ],
+  "comparison": [
+    {
+      "capability": "Visual page workflow",
+      "visual": "Yes",
+      "code": "External browser",
+      "avocado": "Yes"
+    },
+    {
+      "capability": "Normal source repository as truth",
+      "visual": "No",
+      "code": "Yes",
+      "avocado": "Yes"
+    },
+    {
+      "capability": "Astro source files",
+      "visual": "Export / external",
+      "code": "Native",
+      "avocado": "Native"
+    },
+    {
+      "capability": "No export step",
+      "visual": "No",
+      "code": "Yes",
+      "avocado": "Yes"
+    },
+    {
+      "capability": "Built-in coding-agent workflow",
+      "visual": "Limited / external",
+      "code": "Yes",
+      "avocado": "Yes"
+    },
+    {
+      "capability": "Source-linked visual context for agents",
+      "visual": "No",
+      "code": "Manual",
+      "avocado": "Yes"
+    },
+    {
+      "capability": "Built-in Git workflow",
+      "visual": "No",
+      "code": "Usually separate",
+      "avocado": "Yes"
+    },
+    {
+      "capability": "Local project workflow",
+      "visual": "No",
+      "code": "Yes",
+      "avocado": "Yes"
+    },
+    {
+      "capability": "Astro content collections",
+      "visual": "No",
+      "code": "Manual",
+      "avocado": "Built in"
+    },
+    {
+      "capability": "Local file-based CMS",
+      "visual": "No",
+      "code": "Manual",
+      "avocado": "Yes"
+    },
+    {
+      "capability": "Pages and assets",
+      "visual": "Platform-managed",
+      "code": "Files",
+      "avocado": "Project UI + files"
+    },
+    {
+      "capability": "CSS custom-property workspace",
+      "visual": "Platform-specific",
+      "code": "Manual",
+      "avocado": "Yes"
+    },
+    {
+      "capability": "Source-side CSS provenance",
+      "visual": "Platform-specific",
+      "code": "DevTools / code",
+      "avocado": "Yes"
+    },
+    {
+      "capability": "Visual CSS editing",
+      "visual": "Yes",
+      "code": "No",
+      "avocado": "Not yet"
+    },
+    {
+      "capability": "Hosting included",
+      "visual": "Usually",
+      "code": "No",
+      "avocado": "No"
+    },
+    {
+      "capability": "Deployment lock-in",
+      "visual": "Platform dependent",
+      "code": "No",
+      "avocado": "No"
+    },
+    {
+      "capability": "Agent provider choice",
+      "visual": "Platform dependent",
+      "code": "Yes",
+      "avocado": "Claude Code, Codex, OpenCode"
+    }
+  ],
+  "stages": [],
+  "providers": [],
+  "finalTitle": "Own the site after you close the builder.",
+  "finalBody": "Your source, your tools, your hosting. One local workspace connecting them."
+}

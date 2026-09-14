@@ -1,0 +1,5 @@
+{
+  "image": "../../assets/product/Canvas-mode.png",
+  "alt": "Desktop, tablet, and phone previews of the same Astro page in Avocado, alongside the Navigator and Button props.",
+  "caption": "Compare three viewport sizes while the page structure and component settings stay within reach."
+}

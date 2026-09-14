@@ -1,0 +1,35 @@
+{
+  "title": "A visual shell around a real development environment.",
+  "eyebrow": "Under the hood",
+  "intro": "Avocado uses a Tauri desktop shell with a Rust core and React interface. One direction of truth: from the repository outward.",
+  "sections": [
+    {
+      "title": "Project state",
+      "body": "The Rust side owns project state, filesystem access, source parsing, history, Git, content indexing, child processes, agents, and development-server supervision. The React interface projects that state into the workspace. The canvas runs the project's own Astro page. The UI does not become a second version of the project."
+    },
+    {
+      "title": "Source mapping",
+      "body": "Astro files are analyzed into stable source-backed nodes with paths, byte spans, attributes, and locations. Development-only markers connect rendered elements back to those nodes."
+    },
+    {
+      "title": "Canvas",
+      "body": "Avocado launches the project's own development server and injects its bridge into development responses. Your source and project configuration remain untouched."
+    },
+    {
+      "title": "Live updates",
+      "body": "A three-tree morphing system compares server renders and updates the current DOM while trying to preserve useful client-side state such as scroll position, animation state, video state, and expanded interface elements."
+    },
+    {
+      "title": "Content",
+      "body": "Astro collection definitions are evaluated against the project's own schema dependencies. A local SQLite index adds search, references, backlinks, usage information, and delete guards. The index remains derived state."
+    },
+    {
+      "title": "Agents",
+      "body": "Claude Code, Codex, and OpenCode are normalized into a common Avocado interface while provider-specific configuration and authentication remain external."
+    },
+    {
+      "title": "External MCP",
+      "body": "Terminal-launched agents can access a read-only Avocado MCP surface for project and source context. When the Avocado app is running, selected live-canvas operations can also be available."
+    }
+  ]
+}

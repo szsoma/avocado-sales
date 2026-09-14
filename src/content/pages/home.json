@@ -1,0 +1,339 @@
+{
+  "storyTitle": "See it. Point to it. Change it.",
+  "storyEyebrow": "A better development loop",
+  "title": "Avocado — The visual builder that doesn't own your website.",
+  "description": "Your real Astro repository, live site, source code, content, Git, and coding agents in one local workspace. Pre-alpha. macOS first.",
+  "eyebrow": "Agent-first visual development for Astro",
+  "headline": "The visual builder that doesn't own your website.",
+  "intro": "Avocado brings your real Astro repository, live site, source code, content, Git workflow, and coding agents into one local workspace.",
+  "heroMedia": "hero",
+  "sections": [
+    {
+      "id": "choice",
+      "eyebrow": "The missing layer between design and code",
+      "title": "Building websites shouldn't mean choosing between seeing and owning.",
+      "body": [
+        "Traditional visual builders give you an immediate connection to the page, but put a platform-specific document model underneath it.",
+        "Code-first workflows give you the real files, Git, and powerful coding agents, but every visual change becomes a loop between editor, terminal, browser, screenshots, and prompts.",
+        "Avocado keeps the real repository and adds the visual layer back."
+      ],
+      "items": [
+        {
+          "title": "Visual builder",
+          "body": "Page → Platform document → Export / platform"
+        },
+        {
+          "title": "Code + agent",
+          "body": "Prompt → Source → Browser → Back to prompt"
+        },
+        {
+          "title": "Avocado",
+          "body": "Canvas ↔ Source ↔ Agent. Your Astro repo stays underneath."
+        }
+      ]
+    },
+    {
+      "id": "agents",
+      "eyebrow": "Agents, inside the development loop",
+      "title": "Your coding agent belongs next to the website.",
+      "body": [
+        "Running an agent in the terminal is powerful. Running it while the page, selected component, source structure, errors, project state, and review tools are all part of the same workspace is something different.",
+        "Avocado integrates Claude Code, OpenCode, and Codex using the CLI tools and accounts you already control."
+      ],
+      "items": [],
+      "media": "agent",
+      "link": {
+        "label": "Explore the agent workspace",
+        "href": "/agents"
+      }
+    },
+    {
+      "id": "pins",
+      "eyebrow": "Point to what you mean",
+      "title": "Point at the problem instead of writing a paragraph about it.",
+      "body": [
+        "Click an element. Leave a pin. Send it to your agent.",
+        "“The spacing here breaks on mobile. Fix it without changing the desktop layout.”",
+        "Avocado carries the source reference and surrounding page context with the request. The conversation starts closer to the actual problem."
+      ],
+      "items": [],
+      "media": "pins"
+    },
+    {
+      "id": "source",
+      "eyebrow": "Real files underneath everything",
+      "title": "There is nothing to export.",
+      "body": [
+        "Avocado edits the Astro project you opened. Pages remain in src/pages. Assets remain in src/assets and public. Content remains in your project. CSS variables remain CSS variables. Git remains Git.",
+        "Your normal astro build does not need Avocado to understand the project.",
+        "Close Avocado. Your website is still your website."
+      ],
+      "items": [],
+      "code": "src/\n  pages/       → Astro pages\n  components/  → Your source\n  content/     → Project content\n  assets/      → Processed assets\npublic/        → Static files"
+    },
+    {
+      "id": "workspace",
+      "eyebrow": "The visual workspace",
+      "title": "Use the page as an interface to the codebase.",
+      "body": [
+        "Avocado does not try to hide the code. It makes getting to the right code faster."
+      ],
+      "items": [
+        {
+          "title": "Canvas",
+          "body": "Preview the project's live Astro page at desktop, tablet, and phone widths. Zoom, pan, compare sizes, or navigate the site normally."
+        },
+        {
+          "title": "Navigator",
+          "body": "Move between the rendered page and its underlying element hierarchy. Enter components to inspect what actually renders them."
+        },
+        {
+          "title": "Inspector",
+          "body": "Inspect tags, attributes, component props, source files, and locations. Edit supported attributes and props."
+        },
+        {
+          "title": "Code",
+          "body": "Jump from a selected element to its source and continue in CodeMirror when code is the better interface."
+        }
+      ],
+      "media": "canvas",
+      "link": {
+        "label": "Explore the visual workspace",
+        "href": "/workspace"
+      }
+    },
+    {
+      "id": "preservation",
+      "eyebrow": "Source-preserving edits",
+      "title": "Change the thing you touched. Leave the rest alone.",
+      "body": [
+        "Avocado's source operations work with source spans rather than rebuilding entire files every time a structured edit happens.",
+        "Unrelated formatting, comments, declaration order, and quoting can remain intact. Your code should still feel authored after a visual tool touches it."
+      ],
+      "items": [],
+      "link": {
+        "label": "Technical details",
+        "href": "#technical-preservation"
+      }
+    },
+    {
+      "id": "cms",
+      "eyebrow": "Content without surrendering the content",
+      "title": "Your CMS can live in the repo too.",
+      "body": [
+        "Avocado understands Astro content collections and turns them into an interface for editing real project content.",
+        "Edit typed fields. Write Markdown. Follow references. Inspect backlinks. Validate entries. Manage related assets.",
+        "The files remain canonical. Avocado's local index exists to help you understand them, not replace them."
+      ],
+      "items": [],
+      "media": "cms-editor",
+      "link": {
+        "label": "Explore content management",
+        "href": "/content"
+      }
+    },
+    {
+      "id": "variables",
+      "eyebrow": "Your CSS remains the source",
+      "title": "Your design tokens are already in the project.",
+      "body": [
+        "Browse CSS custom properties by stylesheet. Organize them into groups. Compare compatible modes. Change values. Reorder tokens. Review accessibility checks for responsive clamp() typography.",
+        "No separate design-token database required."
+      ],
+      "items": [
+        {
+          "title": "When the CSS wins, know why.",
+          "body": "Inspect the source declaration, selector, file, line, and origin responsible for a selected element's styles. The current Style view focuses on understanding the source; a complete visual CSS editor is not yet shipped."
+        }
+      ],
+      "media": "variables"
+    },
+    {
+      "id": "utilities",
+      "eyebrow": "Not just a canvas",
+      "title": "One local workspace for the rest of the website.",
+      "body": [],
+      "items": [
+        {
+          "title": "Pages",
+          "body": "Browse and organize src/pages. Create, move, rename, and duplicate pages. Open them directly in the canvas."
+        },
+        {
+          "title": "Assets",
+          "body": "Browse src/assets and public separately. Upload files, create folders, preview thumbnails, and inspect references before deleting assets used by content."
+        },
+        {
+          "title": "Git",
+          "body": "See the current branch and changed files. Create or switch branches. Review, commit, merge, and push."
+        },
+        {
+          "title": "Terminal",
+          "body": "Run the project's normal commands in a real local shell, from the project root."
+        },
+        {
+          "title": "Sessions",
+          "body": "Search, rename, archive, and return to local agent conversations. Resume supported provider sessions deliberately."
+        }
+      ],
+      "media": "pages"
+    },
+    {
+      "id": "stack",
+      "eyebrow": "The stack stays yours",
+      "title": "Avocado doesn't replace your development stack.",
+      "body": [
+        "It makes the stack visible.",
+        "Astro remains Astro. Git remains Git. Your coding agent remains your coding agent. Your provider remains your provider. Your hosting stays wherever you want it.",
+        "Avocado becomes the interface connecting the parts."
+      ],
+      "items": [],
+      "link": {
+        "label": "Under the hood",
+        "href": "#technical-architecture"
+      }
+    },
+    {
+      "id": "compare",
+      "eyebrow": "Compare the workflows",
+      "title": "A different kind of website builder.",
+      "body": [
+        "Visual feedback, a real source repository, and coding agents at the core of the workflow."
+      ],
+      "items": [],
+      "link": {
+        "label": "Compare the workflows",
+        "href": "/compare"
+      }
+    },
+    {
+      "id": "audience",
+      "eyebrow": "Built for people who want both sides",
+      "title": "Keep the directness. Keep the implementation.",
+      "body": [],
+      "items": [
+        {
+          "title": "Astro developers",
+          "body": "Keep the repository and reduce the browser-editor-terminal shuffle."
+        },
+        {
+          "title": "Front-end developers",
+          "body": "Select the rendered element and move directly toward the source that matters."
+        },
+        {
+          "title": "Webflow developers moving closer to code",
+          "body": "Keep the directness of a visual workflow while working with an ordinary Astro codebase underneath."
+        },
+        {
+          "title": "Agent-heavy developers",
+          "body": "Give your coding agents structured project context instead of rebuilding it manually in every conversation."
+        },
+        {
+          "title": "Designers who code",
+          "body": "Stay close to the rendered page without giving up the underlying implementation."
+        }
+      ]
+    }
+  ],
+  "stages": [
+    {
+      "title": "See the actual site",
+      "body": "Avocado starts your project's own astro dev server and places the running page directly inside the workspace. The thing you see is the page your project actually renders.",
+      "media": "hero"
+    },
+    {
+      "title": "Point to what you mean",
+      "body": "Select something on the page and connect it to the source-backed element that produced it. Navigate its component, inspect attributes, find its file, and jump into source.",
+      "media": "structure"
+    },
+    {
+      "title": "Give the agent context",
+      "body": "Send Claude Code, Codex, or OpenCode the selected element, page structure, relevant source, console errors, pins, files, or images. The surrounding context travels with your prompt.",
+      "media": "pins"
+    },
+    {
+      "title": "Watch the work happen",
+      "body": "Agent turns appear inside Avocado with streamed responses, plans, tasks, tool calls, permissions, and file changes. Keep the page visible while the repo changes underneath it.",
+      "code": "Agent turn\n  → Streamed response\n  → Plan and tasks\n  → Tool calls and permissions\n  → Changed files"
+    },
+    {
+      "title": "Review what actually landed",
+      "body": "Open the diff. Inspect files individually. Revert what should not stay. Undo supported changes. Commit when you are happy. The agent can write the code. You keep control of the project.",
+      "code": "Changed files → Open diff\nReview each change → Keep or revert\nSupported undo → Commit with Git"
+    }
+  ],
+  "providers": [
+    {
+      "name": "Claude Code",
+      "detail": "Use Claude Code through its installed local CLI. Avocado reads the available configuration and runs the agent inside the project workflow while keeping your existing Claude authentication and subscription model.",
+      "note": "Uses your installed local CLI and existing Claude authentication and subscription."
+    },
+    {
+      "name": "Codex",
+      "detail": "Use Codex through its local app-server integration with model selection, reasoning controls, approvals, context, and supported thread resume.",
+      "note": "Codex's app-server is currently an experimental upstream interface."
+    },
+    {
+      "name": "OpenCode",
+      "detail": "Use OpenCode through its native ACP connection with model and access controls, streamed turns, permissions, and capability-aware session loading.",
+      "note": "Session loading follows the capabilities supported by the provider."
+    }
+  ],
+  "comparison": [
+    {
+      "capability": "Visual feedback",
+      "visual": "Strong",
+      "code": "Browser workflow",
+      "avocado": "Built into workspace"
+    },
+    {
+      "capability": "Source of truth",
+      "visual": "Platform document",
+      "code": "Repository",
+      "avocado": "Repository"
+    },
+    {
+      "capability": "Coding agents",
+      "visual": "Secondary",
+      "code": "Core workflow",
+      "avocado": "Core workflow"
+    },
+    {
+      "capability": "Agent context",
+      "visual": "Limited",
+      "code": "Mostly manual",
+      "avocado": "Source-linked context"
+    },
+    {
+      "capability": "CMS",
+      "visual": "Platform data",
+      "code": "Files / external CMS",
+      "avocado": "Astro content collections"
+    },
+    {
+      "capability": "Git",
+      "visual": "Outside core model",
+      "code": "Native",
+      "avocado": "Native"
+    },
+    {
+      "capability": "Export boundary",
+      "visual": "Often exists",
+      "code": "None",
+      "avocado": "None"
+    },
+    {
+      "capability": "Hosting",
+      "visual": "Commonly bundled",
+      "code": "Your choice",
+      "avocado": "Your choice"
+    },
+    {
+      "capability": "Local workflow",
+      "visual": "No",
+      "code": "Yes",
+      "avocado": "Yes"
+    }
+  ],
+  "finalTitle": "The website is already in your repo.",
+  "finalBody": "Avocado gives you a better way to work with it. Visual when visual is faster. Code when code is clearer. Agents when the work should be delegated. Git when the change is worth keeping. Currently focused on Astro projects and macOS."
+}

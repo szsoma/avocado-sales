@@ -1,0 +1,5 @@
+{
+  "question": "What happens when Avocado cannot understand a file?",
+  "answer": "It can fall back to the source editor rather than silently restructuring the file. Avocado prefers an explicit limitation over pretending that an unsafe structural edit is safe.",
+  "order": 11
+}

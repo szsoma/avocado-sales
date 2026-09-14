@@ -1,0 +1,5 @@
+{
+  "image": "../../assets/product/code-view.png",
+  "alt": "Avocado showing the live page beside Hero.astro source code, with a selected Button and its variant options.",
+  "caption": "Source editing and supported component props alongside the actual page."
+}

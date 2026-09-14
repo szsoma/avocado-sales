@@ -1,0 +1,23 @@
+{
+  "title": "Context without giant prompts",
+  "eyebrow": "Agent context",
+  "intro": "Give the agent the page around the prompt.",
+  "sections": [
+    {
+      "title": "A local context document",
+      "body": "Avocado compiles the context for a turn into a local Markdown document. The agent receives a reference to that context rather than requiring every piece of project information to be repeated inline inside the user prompt."
+    },
+    {
+      "title": "Context you can inspect",
+      "body": "The result is context that is inspectable by the developer and easier to reason about than an invisible context blob."
+    },
+    {
+      "title": "The project around the request",
+      "body": "Selected and referenced elements, a bounded page summary, console errors, pins, and supported attachments can help ground the turn. Attachment support depends on the selected backend."
+    },
+    {
+      "title": "External agents",
+      "body": "Terminal-launched agents can use Avocado's deliberately read-only MCP surface for project and source context. Their normal tools remain responsible for changing the project."
+    }
+  ]
+}
