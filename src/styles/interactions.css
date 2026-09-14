@@ -67,7 +67,7 @@
 .comparison tr:last-child > * { border-bottom: 0; }
 .comparison tr > :last-child { background: var(--color-accent-soft); color: var(--color-accent); }
 .comparison thead th { padding-block: 1.5rem; }
-.technical-index > details { padding-block: 1rem; }
+.technical-index > [data-modal-source] { padding-block: 1rem; scroll-margin-top: calc(var(--header-height) + 1rem); }
 .technical-content { max-width: 1000px; padding: 3rem 0; margin-inline: auto; }
 .technical-content > h2 { margin-block: 2rem; max-width: 950px; }
 .technical-intro { font-size: 1.15rem; color: var(--color-muted); max-width: 680px; line-height: 1.8; margin-bottom: 3rem; }

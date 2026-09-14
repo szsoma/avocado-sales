@@ -369,7 +369,7 @@ function checkNoFakeSignupForm() {
     } else {
       // No real signup URL configured: the early-access dialog content
       // itself must not claim a successful registration or collect email.
-      const dialogMatch = html.match(/<details id="early-access"[^>]*>([\s\S]*?)<\/details>/);
+      const dialogMatch = html.match(/<div id="early-access"[^>]*>([\s\S]*?)<\/aside>/);
       if (dialogMatch && /type=["']email["']/i.test(dialogMatch[1])) {
         fail(`Route "${routePath}" (${filePath}): #early-access dialog contains an email input despite no site.signupUrl being configured.`);
       }

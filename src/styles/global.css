@@ -148,9 +148,11 @@ a:hover .arrow { transform: translateX(3px); }
 .subpage-hero { padding-bottom: 4rem; }
 .subpage-hero h1 { max-width: 980px; }
 .subpage-hero .hero-intro { max-width: 650px; }
-.technical-index { border-top: 1px solid var(--color-line); padding-block: 2rem; }
-.technical-index:has(> details:not([hidden]))::before { content: 'Technical reading'; font: .7rem var(--font-mono); display: block; margin-bottom: 1rem; }
-.technical-index:has(> details):not(:has(> details:not([hidden]))) { display: none; }
+/* With JS the index is hidden; without it the sections stay readable at the
+   page end, and the trailing space lets #fragment links scroll them to the top. */
+.technical-index { border-top: 1px solid var(--color-line); padding-block: 2rem 100vh; }
+.technical-index:has(> [data-modal-source]:not([hidden]))::before { content: 'Technical reading'; font: .7rem var(--font-mono); display: block; margin-bottom: 1rem; }
+.technical-index:has(> [data-modal-source]):not(:has(> [data-modal-source]:not([hidden]))) { display: none; }
 @media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
   .hero > * { animation: enter .65s var(--ease-out) both; }
   .hero h1 { animation-delay: 60ms; }

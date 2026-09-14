@@ -2,8 +2,23 @@
 function setupDialogs() {
   if (typeof HTMLDialogElement === 'undefined') return;
   const dialogs = new Map<string, HTMLDialogElement>();
+  let currentDialog: HTMLDialogElement | null = null;
   let activeTrigger: HTMLElement | null = null;
-  document.querySelectorAll<HTMLDetailsElement>('[data-modal-source]').forEach(source => {
+  let activeHash = false;
+  // Idempotent cleanup: safe to call from the close event, the close button's
+  // click handler, and the cancel (Escape) handler alike. `currentDialog` is
+  // reassigned before an old dialog is closed when switching, so a stale
+  // close/cancel event arriving later for that dialog is a no-op here.
+  const finish = (dialog: HTMLDialogElement) => {
+    if (currentDialog !== dialog) return;
+    currentDialog = null;
+    document.body.classList.remove('modal-open');
+    if (activeHash) history.replaceState(null, '', location.pathname + location.search);
+    activeHash = false;
+    activeTrigger?.focus({ preventScroll: true });
+    activeTrigger = null;
+  };
+  document.querySelectorAll<HTMLElement>('[data-modal-source]').forEach(source => {
     const content = source.querySelector<HTMLElement>('.technical-content');
     const title = content?.querySelector('h2');
     if (!content || !title) return;
@@ -18,27 +33,40 @@ function setupDialogs() {
     close.type = 'button';
     close.className = 'dialog-close';
     close.textContent = 'Close ×';
-    close.autofocus = true;
-    close.addEventListener('click', () => dialog.close());
+    // Some browsers stop firing `close` reliably after an Escape-driven
+    // close earlier in the tab's lifetime, so clean up directly here too.
+    close.addEventListener('click', () => { dialog.close(); finish(dialog); });
     bar.append(label, close);
     dialog.append(bar, content);
     document.body.append(dialog);
     source.hidden = true;
     dialogs.set(source.id, dialog);
-    dialog.addEventListener('close', () => {
-      if (document.querySelector('dialog[open]')) return;
-      document.body.classList.remove('modal-open');
-      activeTrigger?.focus({ preventScroll: true });
-      activeTrigger = null;
-    });
+    dialog.addEventListener('close', () => finish(dialog));
+    // Native Escape cancellation still performs the close itself; defer the
+    // cleanup so it runs after the default close action, rather than trying
+    // to restore focus while the modal is still open.
+    dialog.addEventListener('cancel', () => setTimeout(() => finish(dialog), 0));
   });
-  const open = (id: string, trigger: HTMLElement | null) => {
+  const open = (id: string, trigger: HTMLElement | null, fromHash = false) => {
     const dialog = dialogs.get(id);
     if (!dialog) return false;
-    dialogs.forEach(other => { if (other.open) other.close(); });
+    const previous = currentDialog;
+    currentDialog = dialog;
+    if (previous && previous !== dialog) previous.close();
     activeTrigger = trigger;
+    activeHash = fromHash;
     dialog.showModal();
     dialog.scrollTop = 0;
+    const closeButton = dialog.querySelector<HTMLButtonElement>('.dialog-close');
+    closeButton?.focus();
+    if (document.readyState !== 'complete') {
+      // Chrome moves focus to <body> when the document finishes loading,
+      // which would undo the focus call above for a dialog opened from the
+      // URL fragment during initial page load.
+      window.addEventListener('load', () => {
+        if (currentDialog === dialog && !dialog.contains(document.activeElement)) closeButton?.focus();
+      }, { once: true });
+    }
     document.body.classList.add('modal-open');
     return true;
   };
@@ -48,7 +76,7 @@ function setupDialogs() {
     if (open(trigger.dataset.dialog!, trigger)) event.preventDefault();
   });
   // Direct links to technical content remain usable after progressive enhancement.
-  if (location.hash) open(location.hash.slice(1), null);
+  if (location.hash) open(location.hash.slice(1), null, true);
 }
 
 function setupTabs() {
