@@ -214,27 +214,29 @@ for (const [routePath, { html, filePath, ids }] of pages) {
 }
 
 // ---------------------------------------------------------------------------
-// 6. FAQ JSON-LD parity with visible FAQ content (home page only).
+// 6. FAQ JSON-LD parity with visible FAQ content. The home page is required
+//    to carry the FAQ (spec: "FAQ structured data must match the visible FAQ
+//    exactly"). Other pages currently have no FAQ section, which is fine —
+//    but on any page, the visible list and the JSON-LD must appear together;
+//    one without the other is always a failure.
 // ---------------------------------------------------------------------------
 
-function checkFaqParity() {
-  const home = pages.get('/');
-  if (!home) return;
-  const { html, filePath } = home;
-
+function checkFaqOnPage(routePath, html, filePath, { required }) {
   const faqListMatch = html.match(/<div class="faq-list">([\s\S]*?)<\/div>\s*<\/section>/);
   const ldJsonMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
 
   if (!faqListMatch && !ldJsonMatch) {
-    // No FAQ on this build at all — nothing to compare.
+    if (required) {
+      fail(`Route "${routePath}" (${filePath}): no FAQ found — expected both a .faq-list section and a FAQPage JSON-LD <script> on this page.`);
+    }
     return;
   }
   if (!faqListMatch) {
-    fail(`Route "/" (${filePath}): FAQPage JSON-LD present but no visible .faq-list section found.`);
+    fail(`Route "${routePath}" (${filePath}): FAQPage JSON-LD present but no visible .faq-list section found.`);
     return;
   }
   if (!ldJsonMatch) {
-    fail(`Route "/" (${filePath}): visible FAQ section present but no FAQPage JSON-LD <script> found.`);
+    fail(`Route "${routePath}" (${filePath}): visible FAQ section present but no FAQPage JSON-LD <script> found.`);
     return;
   }
 
@@ -244,7 +246,7 @@ function checkFaqParity() {
     ),
   ];
   if (detailsBlocks.length === 0) {
-    fail(`Route "/" (${filePath}): .faq-list section did not match the expected <details><summary>…</summary><p>…</p></details> structure.`);
+    fail(`Route "${routePath}" (${filePath}): .faq-list section did not match the expected <details><summary>…</summary><p>…</p></details> structure.`);
     return;
   }
 
@@ -257,18 +259,18 @@ function checkFaqParity() {
   try {
     schema = JSON.parse(ldJsonMatch[1]);
   } catch (err) {
-    fail(`Route "/" (${filePath}): FAQPage JSON-LD is not valid JSON: ${err.message}`);
+    fail(`Route "${routePath}" (${filePath}): FAQPage JSON-LD is not valid JSON: ${err.message}`);
     return;
   }
 
   const entity = Array.isArray(schema.mainEntity) ? schema.mainEntity : null;
   if (!entity) {
-    fail(`Route "/" (${filePath}): FAQPage JSON-LD has no mainEntity array.`);
+    fail(`Route "${routePath}" (${filePath}): FAQPage JSON-LD has no mainEntity array.`);
     return;
   }
 
   if (entity.length !== visible.length) {
-    fail(`Route "/" (${filePath}): FAQ count mismatch — ${visible.length} visible FAQ entries vs ${entity.length} in JSON-LD.`);
+    fail(`Route "${routePath}" (${filePath}): FAQ count mismatch — ${visible.length} visible FAQ entries vs ${entity.length} in JSON-LD.`);
   }
 
   const count = Math.min(entity.length, visible.length);
@@ -278,15 +280,21 @@ function checkFaqParity() {
     const name = e?.name ?? '';
     const text = e?.acceptedAnswer?.text ?? '';
     if (name !== v.question) {
-      fail(`Route "/" (${filePath}): FAQ #${i + 1} question mismatch.\n    visible:  ${JSON.stringify(v.question)}\n    JSON-LD:  ${JSON.stringify(name)}`);
+      fail(`Route "${routePath}" (${filePath}): FAQ #${i + 1} question mismatch.\n    visible:  ${JSON.stringify(v.question)}\n    JSON-LD:  ${JSON.stringify(name)}`);
     }
     if (text !== v.answer) {
-      fail(`Route "/" (${filePath}): FAQ #${i + 1} answer mismatch.\n    visible:  ${JSON.stringify(v.answer)}\n    JSON-LD:  ${JSON.stringify(text)}`);
+      fail(`Route "${routePath}" (${filePath}): FAQ #${i + 1} answer mismatch.\n    visible:  ${JSON.stringify(v.answer)}\n    JSON-LD:  ${JSON.stringify(text)}`);
     }
   }
 
-  if (!errors.length || count > 0) {
-    notes.push(`FAQ parity: ${count} entries compared on "/".`);
+  if (count > 0) {
+    notes.push(`FAQ parity: ${count} entries compared on "${routePath}".`);
+  }
+}
+
+function checkFaqParity() {
+  for (const [routePath, { html, filePath }] of pages) {
+    checkFaqOnPage(routePath, html, filePath, { required: routePath === '/' });
   }
 }
 
