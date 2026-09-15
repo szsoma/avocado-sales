@@ -1,4 +1,5 @@
 import { getEntry } from 'astro:content';
+import type { ImageBlock } from './types';
 
 const pageIds = ['home', 'agents', 'workspace', 'content', 'compare'] as const;
 export type PageId = (typeof pageIds)[number];
@@ -32,4 +33,17 @@ export async function getSite() {
   const entry = await getEntry('site', 'main');
   if (!entry) throw new Error('Missing site settings: main');
   return entry.data;
+}
+
+export async function getMediaBlock(
+  ref: { collection: 'media'; id: string } | undefined
+): Promise<ImageBlock | undefined> {
+  if (!ref) return undefined;
+  const entry = await getEntry(ref);
+  if (!entry) throw new Error(`Missing media entry: ${ref.id}`);
+  return {
+    src: entry.data.image,
+    alt: entry.data.alt,
+    caption: entry.data.caption,
+  };
 }
