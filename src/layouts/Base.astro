@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import '../styles/interactions.css';
+import { getCollection } from 'astro:content';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import TechnicalDetails from '../components/TechnicalDetails.astro';
@@ -13,6 +14,7 @@ interface Props {
 
 const { title, description } = Astro.props;
 const site = await getSite();
+const technicalTopics = await getCollection('technical');
 ---
 
 <!doctype html>
@@ -34,7 +36,7 @@ const site = await getSite();
     <Header site={site} />
     <slot />
     <Footer site={site} />
-    <TechnicalDetails />
+    <TechnicalDetails topics={technicalTopics} site={site} />
     <script>
       import '../scripts/interactions';
     </script>

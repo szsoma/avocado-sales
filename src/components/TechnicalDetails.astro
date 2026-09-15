@@ -1,8 +1,7 @@
 ---
-import { getCollection } from 'astro:content';
-import { getSite } from '../lib/content';
-const topics = await getCollection('technical');
-const site = await getSite();
+import type { CollectionEntry } from 'astro:content';
+interface Props { topics: CollectionEntry<'technical'>[]; site: CollectionEntry<'site'>['data']; }
+const { topics, site } = Astro.props;
 ---
 <aside class="container technical-index" aria-label="Technical details and availability">
   {topics.map(topic => <div id={`technical-${topic.id}`} data-modal-source>
