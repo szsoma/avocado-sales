@@ -1,7 +1,7 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-interface Props { stages: CollectionEntry<'pages'>['data']['stages']; mode: 'context' | 'source'; title: string; eyebrow: string; note?: string; }
-const { stages, mode, title, eyebrow, note } = Astro.props;
+import type { StageBlock } from '../lib/types';
+interface Props { mode: 'context' | 'source'; eyebrow: string; title: string; note?: string; stages: StageBlock[]; }
+const { mode, eyebrow, title, note, stages } = Astro.props;
 ---
 <section class="chapter context-story" data-context-story aria-label={mode === 'context' ? 'How a prompt gains project context' : 'From a rendered element to source'}>
   <div class="context-board"><p class="eyebrow">{eyebrow}</p><h2>{title}</h2><div class="context-chips">{stages.map(stage => <span data-context-chip><span aria-hidden="true">+</span> {stage.title}</span>)}</div>{note && <p class="context-board-note">{note}</p>}</div>

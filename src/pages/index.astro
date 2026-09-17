@@ -10,21 +10,35 @@ import FAQ from '../components/FAQ.astro';
 import FAQItem from '../components/FAQItem.astro';
 import FinalCTA from '../components/FinalCTA.astro';
 import { getCollection } from 'astro:content';
-import { getPage, getSite } from '../lib/content';
+import { getPage, getSite, getMediaBlock } from '../lib/content';
+import type { SectionBlock, StageBlock } from '../lib/types';
 const [page, site] = await Promise.all([getPage('home'), getSite()]);
 const faqs = (await getCollection('faqs')).sort((a, b) => a.data.order - b.data.order);
-const firstSection = page.sections.find(section => section.id === 'choice')!;
-const remaining = page.sections.filter(section => section.id !== 'choice');
+const heroMedia = await getMediaBlock(page.heroMedia);
+if (!heroMedia) throw new Error('home: hero media required');
+const sections: SectionBlock[] = [];
+for (const [i0, { media, ...section }] of page.sections.entries()) {
+  sections.push({
+    ...section,
+    number: i0 + 1,
+    media: media ? await getMediaBlock(media) : undefined,
+    variant: ['source', 'stack'].includes(section.id) ? 'statement' : ['workspace', 'utilities'].includes(section.id) ? 'standard' : undefined,
+  });
+}
+const first = sections[0];
+const rest = sections.slice(1);
+const storyStages: StageBlock[] = [];
+for (const stage of page.stages) storyStages.push({ ...stage, media: stage.media ? await getMediaBlock(stage.media) : undefined });
 ---
 <Base title={page.title} description={page.description}>
   <main id="main-content" class="container">
     <Hero page={page} site={site} home={true} />
-    <div class="hero-media"><ProductImage media={page.heroMedia} eager /></div>
+    <div class="hero-media"><ProductImage {...heroMedia} eager /></div>
     <ul class="capability-strip" aria-label="Built on your development stack">{site.capabilityLabels.map(label => <li>{label}</li>)}</ul>
-    <Section section={firstSection} number={1} />
-    <ScrollStory stages={page.stages} title={page.storyTitle} eyebrow={page.storyEyebrow} />
-    {remaining.map((section, i) => <>
-      <Section section={section} number={i + 2} variant={['source', 'stack'].includes(section.id) ? 'statement' : ['workspace', 'utilities'].includes(section.id) ? 'standard' : undefined} />
+    <Section {...first} />
+    <ScrollStory id="workflow" eyebrow={page.storyEyebrow} title={page.storyTitle} stages={storyStages} />
+    {rest.map(section => <>
+      <Section {...section} />
       {section.id === 'agents' && <ProviderTabs providers={page.providers} id="home-provider" />}
       {section.id === 'compare' && <Comparison rows={page.comparison} caption={page.comparisonCaption} columns={page.comparisonColumns} />}
     </>)}

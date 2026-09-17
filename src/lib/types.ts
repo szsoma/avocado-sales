@@ -24,6 +24,19 @@ export interface StageBlock {
   code?: string;
 }
 
+export interface SectionBlock {
+  id: string;
+  number?: number;
+  variant?: 'standard' | 'split' | 'statement';
+  eyebrow: string;
+  title: string;
+  body?: string[];
+  link?: SectionLink;
+  items?: ItemBlock[];
+  code?: string;
+  media?: ImageBlock;
+}
+
 export interface ProviderBlock {
   name: string;
   detail: string;
