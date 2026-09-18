@@ -3,4 +3,4 @@ import type { CollectionEntry } from 'astro:content';
 interface Props { site: CollectionEntry<'site'>['data']; small?: boolean; }
 const { site, small = false } = Astro.props;
 ---
-<a class:list={['button', { 'button-small': small }]} href={site.signupUrl || '#early-access'} data-dialog={site.signupUrl ? undefined : 'early-access'}>{site.ctaLabel}<span class="arrow" aria-hidden="true">↗</span></a>
+<a class:list={['button', { 'button-small': small }]} href={site.signupUrl || '#early-access'} data-dialog={site.signupUrl ? undefined : 'early-access'}>{site.ctaLabel}</a>

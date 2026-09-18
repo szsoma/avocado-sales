@@ -243,7 +243,7 @@
     {
       "title": "Point to what you mean",
       "body": "Select something on the page and connect it to the source-backed element that produced it. Navigate its component, inspect attributes, find its file, and jump into source.",
-      "media": "structure"
+      "media": "pins"
     },
     {
       "title": "Give the agent context",
