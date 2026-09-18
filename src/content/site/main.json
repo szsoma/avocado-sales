@@ -6,11 +6,12 @@
   "faqIntro": "Real files. Clear boundaries.",
   "technicalLinkLabel": "Under the hood",
   "availabilityTitle": "A closer connection to your website.",
-  "availabilityIntro": "Avocado is currently in pre-alpha, focused on Astro projects and macOS. It is not yet publicly distributed.",
+  "availabilityIntro": "Avocado is currently in closed alpha, focused on Astro projects and macOS. It is not yet publicly distributed.",
   "availabilityNote": "Early-access signup is not connected in this preview. No email is collected or saved.",
   "name": "Avocado",
   "description": "A local, agent-first visual development environment for Astro.",
-  "status": "Pre-alpha. macOS first.",
+  "status": "Closed alpha. macOS first.",
+  "alphaLabel": "Closed alpha",
   "ctaLabel": "Request early access",
   "nav": [
     {

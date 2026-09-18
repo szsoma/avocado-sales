@@ -17,6 +17,7 @@ const site = defineCollection({
     name: z.string().min(1),
     description: z.string().min(1),
     status: z.string().min(1),
+    alphaLabel: z.string().min(1),
     ctaLabel: z.string().min(1),
     heroSecondaryLabel: z.string().min(1),
     capabilityLabels: z.array(z.string().min(1)).min(1),

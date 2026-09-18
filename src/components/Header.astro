@@ -1,13 +1,14 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import Logo from './Logo.astro';
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
 import AccessLink from './AccessLink.astro';
 interface Props { site: CollectionEntry<'site'>['data']; }
 const { site } = Astro.props;
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
 <header class="site-header"><div class="container header-inner">
-  <a class="brand" href="/" aria-label={`${site.name} home`}><Logo />{site.name}</a>
+  <a class="brand" href="/" aria-label={`${site.name} home`}><Image class="brand-logo" src={logo} alt={site.name} widths={[140, 280]} format="webp" quality={90} /></a>
   <nav class="desktop-nav" aria-label="Main navigation">{site.nav.map(link => <a href={link.href} aria-current={currentPath === link.href ? 'page' : undefined}>{link.label}</a>)}</nav>
   <div class="header-actions"><AccessLink site={site} small />
     <details class="mobile-menu"><summary><span class="menu-open">Menu</span><span class="menu-close">Close</span></summary><nav class="mobile-nav" aria-label="Mobile navigation">{site.nav.map(link => <a href={link.href} aria-current={currentPath === link.href ? 'page' : undefined}>{link.label}</a>)}</nav></details>

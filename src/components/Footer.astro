@@ -1,10 +1,11 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import Logo from './Logo.astro';
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
 interface Props { site: CollectionEntry<'site'>['data']; }
 const { site } = Astro.props;
 ---
 <footer class="site-footer"><div class="container">
-  <div class="footer-top"><div><a class="brand" href="/"><Logo />{site.name}</a><p class="footer-description">{site.description}</p></div><nav class="footer-links" aria-label="Footer navigation">{site.nav.map(link => <a href={link.href}>{link.label}</a>)}<a href="#technical-architecture" data-dialog="technical-architecture">{site.technicalLinkLabel} ↗</a></nav></div>
+  <div class="footer-top"><div><a class="brand" href="/" aria-label={`${site.name} home`}><Image class="brand-logo" src={logo} alt={site.name} widths={[130, 260]} format="webp" quality={90} /></a><p class="footer-description">{site.description}</p></div><nav class="footer-links" aria-label="Footer navigation">{site.nav.map(link => <a href={link.href}>{link.label}</a>)}<a href="#technical-architecture" data-dialog="technical-architecture">{site.technicalLinkLabel} ↗</a></nav></div>
   <div class="footer-bottom"><span>© {new Date().getFullYear()} {site.name} · {site.footerLine}</span><span>{site.status}</span></div>
 </div></footer>
